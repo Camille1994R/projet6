@@ -4,41 +4,29 @@ async function Bcategories() {
     const button = await categoriesButtons.json();
     console.log(button)
 
-    button.forEach(buttonVar => {
-        const name = buttonVar.name;
-        const id = buttonVar.id;
-        console.log(id);
+   let bodyButton =  `
+        <input type="submit" value="Tous" id="Tous">
+        <input type="submit" value="Objets" id="Objets">
+        <input type="submit" value="Appartements" id="Appartements">
+        <input type="submit" value="Hôtels & restaurants" id="Hôtels & restaurants">
 
-        document.getElementById("filters").innerHTML += `
-            
-            <input type="submit" value="${name}" id="${id}"> 
-            
-        `
-        let buttonElement = document.getElementById(id);
-        buttonElement.addEventListener("click", kaban);
-        buttonElement.id = id;
-    });
+   `
+    let filterButton = document.getElementById("filters");
+    filterButton.innerHTML = bodyButton;
+
 }
 Bcategories()
 
-async function kaban(event) {
+async function kaban() {
     const reponse = await fetch("http://localhost:5678/api/works");
-    let projet = await reponse.json();
+    const projet = await reponse.json();
     console.log(projet)
-    console.log(event.target.id)
 
-    if (event != null) {
-        projet = projet.filter((imageProjet) => imageProjet.categoryId == event.target.id)
-    }
-
-
-    document.getElementById("gallery").innerHTML = ` `
     projet.forEach(element => {
-        console.log(element)
         const image = element.imageUrl;
         const title = element.title;
 
-        document.getElementById("gallery").innerHTML += `
+        document.getElementById("gallery").innerHTML +=  `
         <figure>
 				<img src="${image}" alt="${title}">
 				<figcaption>${title}</figcaption>
