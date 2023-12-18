@@ -123,9 +123,45 @@ console.log(token)
 let logout = document.getElementById("log");
 if (token == null) {
     logout.innerHTML = "login"
+
 } else {
-    logout.innerHTML = "log out"
+    logout.innerHTML = "logout"
 }
+
+
+let spanOut = document.getElementById("modifier");
+spanOut.innerHTML += `<i class="fa-solid fa-pen-to-square"></i> Modifier`;
+
+
+if (token == null) {
+    spanOut.style.visibility = 'hidden'
+} else {
+    spanOut.style.visibility = 'visible' }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*const form = document.querySelector('form');
     form.addEventListener("submit", (event) => { 
