@@ -141,23 +141,24 @@ if (token == null) {
 
 //Récupérer la modal et le bouton
 let modal = document.getElementById("myModal");
+console.log(modal)
 let btn = document.getElementById("modifier");
+btn.addEventListener("click", fonctionModale => {
+    modal.style.display = "block";
+    console.log("yo")
+})
+console.log(btn)
 
 //Récupération du span qui ferme la modale 
-let span = document.querySelector(".close")[0];
-
-//Quand l'utilisateur clique sur le bouton, cela ouvre la modale
-btn.addEventListener = function(){
-    modal.style.display = "block";
-}
-
-//Quand l'utilisateur clique sur x, cela ferme la modale
-span.addEventListener = function(){
+let span = document.getElementById("close");
+console.log(span)
+span.addEventListener("click", fonctionModale => {
     modal.style.display = "none";
-}
+})
+
 
 // si on clique en dehors de la modale, ça la ferme 
-window.addEventListener = function(event) {
+window.onclick = function(event) {
     if (event.target == modal){
         modal.style.display = "none";
     }
