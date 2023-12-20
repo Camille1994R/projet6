@@ -16,7 +16,8 @@ async function Bcategories() {
 // =======================================================
 // Étape 1.1 : Récupération des travaux depuis le back-end
 // =======================================================
-async function getWorksfromAPI() {
+async function getWorksfromAPI(div, modale) {
+    // div parce qu'on veut le mettre dans deux div
     // On utilise l'API Fetch pour récupérer les travaux (GET). 
     // On stocke la réponse de la requête dan une variable URLAPIwork
     const URLAPIwork = await fetch(api_works);
@@ -31,7 +32,7 @@ async function getWorksfromAPI() {
         const category = work.category.name;
 
         //On crée le bloc figure HTML correspondant à chaque catégorie, puis on les ajoute à un élément HTML ayant l'ID "gallery". 
-        document.getElementById("gallery").innerHTML += `
+        document.getElementById(div).innerHTML += `
         <figure name="${category}">
 				<img src="${image}" alt="${title}" >
 				<figcaption>${title}</figcaption>
@@ -47,10 +48,13 @@ async function getWorksfromAPI() {
         uniqueCategories.add(work.category.name);
     });
     // Appel de la fonction pour l'affichage des catégories.
-    getCategoriesfromAPI(uniqueCategories);
+    if (!modale) {
+        getCategoriesfromAPI(uniqueCategories)
+    }
+    
 }
 
-getWorksfromAPI() // Appel de la fonction , sans ça la fonction écrite plus haut ne sera pas executé.
+getWorksfromAPI("gallery", false) // Appel de la fonction , sans ça la fonction écrite plus haut ne sera pas executé.
 
 // ===============================================
 // Étape 1.2 : Réalisation du filtre des travaux
@@ -145,6 +149,7 @@ console.log(modal)
 let btn = document.getElementById("modifier");
 btn.addEventListener("click", fonctionModale => {
     modal.style.display = "block";
+    getWorksfromAPI("galleryModale", true)
     console.log("yo")
 })
 console.log(btn)
@@ -165,48 +170,27 @@ window.onclick = function(event) {
 }
 
     
+// Récupérez le fichier d'entrée (input type="file") depuis le formulaire
+const imageInput = document.getElementById('media_image');
+const imageFile = imageInput.files[0];
 
+// Créez un objet FormData pour envoyer le fichier
+const formData = new FormData();
+formData.append('image', imageFile);
 
+// Remplacez l'URL de l'API par l'URL de votre propre API
+const apiUrl = 'http://votre-api.com/upload-image';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*const form = document.querySelector('form');
-    form.addEventListener("submit", (event) => { 
-    event.preventDefault();
-    console.log("Il n'y a rien");
-
-    const email = document.getElementById("email").value ;
-    const passwod = document.getElementById("password").value ;
-    console.log(email);
-    console.log(password);
-
-    const balisePassword = document.getElementById("password");
-    const valeurPassword = balisePassword.value;
-    if (valeurPassword === " "){
-        console.log("le champs est vide")
-        } else {
-        console.log("le champs est rempli")    
-        }
-
-    //let maVariable = document.getElementById("idInexistant") <- ?
-    //if (maVariable === null) {
-    //console.log("l'élément n'existe pas")
-    //}else {
-    //maVariable.creatElement("div")   
-    //}    
+// Envoi de la requête POST vers votre API pour télécharger l'image
+fetch(apiUrl, {
+  method: 'POST',
+  body: formData,
 })
-*/
+  .then(response => response.json())
+  .then(data => {
+    // Gérez la réponse de votre API ici
+    console.log('Réponse de l\'API :', data);
+  })
+  .catch(error => {
+    console.error('Erreur lors de l\'envoi de la requête :', error);
+  });

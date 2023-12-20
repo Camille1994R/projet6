@@ -38,19 +38,7 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets<span class="myBtn" id="modifier"> </span></h2>
-		
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-<!-- Modal content -->
-	<div class="modal-content">
-		<span id="close">&times;</span>
-		<h3>Galerie photo</h3>
-		<p style="text-decoration: underline;"> Ajouter une photo </p>
-	</div>
-  
-
+	
 			<div id="filters"></div>
 		
 		<div" class="gallery" id="gallery">
@@ -71,7 +59,6 @@
 		</form>
 	</section>
 </main>
-<script src="/FrontEnd/assets/script.js"></script>
 <footer>
 	<nav>
 		<ul>
@@ -80,9 +67,40 @@
 	</nav>
 </footer>
 
-<script>
-	
-</script>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+	<!-- Modal content -->
+		<div class="modal-content">
+			<span id="close" class="close">&times;</span>
+			<!-- Bouton pour ajouter une photo -->
+		<button id="add_photo">Ajouter une photo</button>
+
+		<!-- Formulaire d'ajout de média -->
+		<form id="media_form" class="hidden">
+			<label for="media_title">Titre :</label>
+			<input type="text" id="media_title" required>
+			
+			<label for="media_category">Catégorie :</label>
+			<select id="media_category" required>
+				<!-- Options de catégorie peuvent être générées dynamiquement en fonction de votre logique -->
+				<option value="1">Catégorie 1</option>
+				<option value="2">Catégorie 2</option>
+				<!-- ... -->
+			</select>
+
+			<label for="images">Media pour l'image</label>
+			<input type="file" id="media_image" accept="image/*" required>
+
+			<button id="validate_button" disabled>Valider</button>
+		</form>
+			<h3>Galerie photo</h3>
+			<div class="galleryModale" id="galleryModale"></div>
+			<p style="text-decoration: underline;"> Ajouter une photo </p>
+		</div>
+	</div> 
+
+<script src="/FrontEnd/assets/script.js"></script>
 
 </body>
 </html>
