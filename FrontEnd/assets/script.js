@@ -194,3 +194,7 @@ fetch(apiUrl, {
   .catch(error => {
     console.error('Erreur lors de l\'envoi de la requête :', error);
   });
+
+  //taille des images
+ // <img src="${dataWorks[productWorks].imageUrl}"
+   //    alt="${dataWorks[productionWorks].title}" class="galleryModale">

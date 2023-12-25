@@ -207,6 +207,7 @@ footer nav ul {
 	width: 630px;
 	height: 630px;
 	border-radius: 10px;
+	align-items: center;
 }
 
 .close {
@@ -221,3 +222,48 @@ footer nav ul {
 	text-decoration: none;
 	cursor: pointer;
 }
+
+
+h3 {
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 400;
+	font-size: 26px;
+	margin-top: 60px;
+	margin-bottom: 20px;
+	
+}
+
+.modal-content img {
+	width: 83px;
+	height: 118px;
+}
+
+figcaption {
+	opacity: 0;
+}
+
+hr {
+	color: #B3B3B3;
+	width: 420px;
+	height: 0px;
+	border: 1px solid #B3B3B3;
+	position:absolute;
+	left: 510px;
+	top: 1229px;
+}
+
+.ajout {
+	border-radius: 60px;
+	background: #1D6154;
+	width: 237px;
+	height: 68px;
+	margin-bottom: 45px;
+	margin-top: 36px;
+	text-align: center;
+	color: #fff;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
