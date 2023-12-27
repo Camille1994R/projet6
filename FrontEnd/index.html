@@ -12,6 +12,7 @@
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;300;400;500;600;700&display=swap');
 	</style>
+	<script src="https://kit.fontawesome.com/71078efd4b.js" crossorigin="anonymous"></script>
 	
 </head>
 <body>		
@@ -74,38 +75,47 @@
 <div id="myModal" class="modal">
 
 	<!-- Modal content -->
-		<div class="modal-content">
-			<span id="close" class="close">&times;</span>
+	<div class="modal-content">
+		<span id="close" class="close">&times;</span>
 			
 			
 			<!-- MODALE 2-->
 			<!-- Bouton pour ajouter une photo -->
-		<button id="add_photo">Ajouter une photo</button>
+		<div id="ajouterPhoto" style="display: none;">
+			<i id="btnRetour" class="fa-solid fa-arrow-left"></i>
+			<h3>Ajout photo</h3>
 
 		<!-- Formulaire d'ajout de média -->
-		<form id="media_form" class="hidden">
-			<label for="media_title">Titre :</label>
-			<input type="text" id="media_title" required>
+			<form id="media_form" class="hidden">
+				<label class="ajoutTitre" for="media_title">Titre :</label>
+				<input class="boxTitre" type="text" id="media_title" required>
 			
-			<label for="media_category">Catégorie :</label>
-			<select id="media_category" required>
+				<label class="ajoutTitre" for="media_category">Catégorie :</label>
+				<select class="boxTitre" id="media_category" required>
 				<!-- Options de catégorie peuvent être générées dynamiquement en fonction de votre logique -->
-				<option value="1">Catégorie 1</option>
-				<option value="2">Catégorie 2</option>
+					<option value="1">Catégorie 1</option>
+					<option value="2">Catégorie 2</option>
 				<!-- ... -->
-			</select>
+				</select>
+		
 
-			<!--MODALE 1-->
-
-			<label for="images">Media pour l'image</label>
+			<label for="media_image">Media pour l'image</label>
 			<input type="file" id="media_image" accept="image/*" required>
 
-			<button id="validate_button" disabled>Valider</button>
-		</form>
-			<h3>Galerie photo</h3>
-			<div class="galleryModale" id="galleryModale"></div>
 			<hr>
-			<p class="ajout"> Ajouter une photo </p>
+
+			<button class="ajout" id="validate_button" disabled>Valider</button>
+			</form>
+		</div>
+	
+	<!--MODALE 1-->
+
+		<div id="modal1">
+			<h3>Galerie photo</h3>
+				<div class="galleryModale" id="galleryModale"></div>
+				<hr>
+				<button id="add_photo" class="ajout"> Ajouter une photo </button>
+			</div>
 		</div>
 	</div> 
 

@@ -169,6 +169,25 @@ window.onclick = function(event) {
     }
 }
 
+
+//Si on clique sur "ajouter une photo" Modale 1 hidden et Modale 2 display
+let ajouterPhoto = document.getElementById("ajouterPhoto");
+let addPhoto = document.getElementById("add_photo");
+let modal1 = document.getElementById("modal1")
+addPhoto.addEventListener("click", fonctionModale2 => {
+    ajouterPhoto.style.display = "block";
+    modal1.style.display = "none";
+    console.log("ajout")
+})
+
+//Si on clique sur la flèche retour, Modale 1 display et Modale 2 hidden
+let btnRetour = document.getElementById("btnRetour");
+btnRetour.addEventListener("click", retourModale1 => {
+    ajouterPhoto.style.display = "none";
+    modal1.style.display = "block";
+})
+
+
     
 // Récupérez le fichier d'entrée (input type="file") depuis le formulaire
 const imageInput = document.getElementById('media_image');

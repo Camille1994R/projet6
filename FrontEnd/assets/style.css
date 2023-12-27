@@ -178,12 +178,24 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	-webkit-appearance: none;
+	appearance: none;
 }
 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+.myBtn {
+	cursor: pointer;
+	font-family: 'Work Sans', sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	color: black;
 }
 
 /* modale */
@@ -199,6 +211,14 @@ footer nav ul {
 	height: 100%;
 	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.4);
+	
+}
+
+.galleryModale {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
 }
 
 .modal-content {
@@ -207,13 +227,20 @@ footer nav ul {
 	width: 630px;
 	height: 630px;
 	border-radius: 10px;
-	align-items: center;
+	align-content: center;
+	position: relative;
+	flex-wrap: wrap;
 }
 
 .close {
+	position: absolute;
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
+	right: 30px;
+	top: 30px;
+	height: 24px;
+	width: 24px;
 }
 
 .close:hover,
@@ -228,8 +255,9 @@ h3 {
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 400;
 	font-size: 26px;
-	margin-top: 60px;
-	margin-bottom: 20px;
+	padding-top: 60px;
+	padding-bottom: 20px;
+	text-align: center;
 	
 }
 
@@ -247,7 +275,6 @@ hr {
 	width: 420px;
 	height: 0px;
 	border: 1px solid #B3B3B3;
-	position:absolute;
 	left: 510px;
 	top: 1229px;
 }
@@ -256,7 +283,7 @@ hr {
 	border-radius: 60px;
 	background: #1D6154;
 	width: 237px;
-	height: 68px;
+	height: 36px;
 	margin-bottom: 45px;
 	margin-top: 36px;
 	text-align: center;
@@ -265,5 +292,40 @@ hr {
 	font-style: normal;
 	font-weight: 700;
 	line-height: normal;
+	cursor: pointer;
+	flex-wrap: wrap;
 }
 
+/* module 2*/
+
+.ajoutTitre {
+	color: #3D3D3D;
+	font-family: 'work sans', sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+.boxTitre {
+	width: 420px;
+	height: 51px;
+	background-color: #fff;
+	box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.29);
+}
+
+#media_form {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	flex-wrap: wrap;
+}
+
+.fa-arrow-left {
+	width: 21px;
+	height: 21px;
+	left: 30px;
+	top: 30px;
+	position: absolute;
+	cursor: pointer;
+}
