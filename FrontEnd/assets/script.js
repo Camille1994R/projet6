@@ -5,12 +5,12 @@ console.log("teste")
 async function Bcategories() {
     const categoriesButtons = await fetch("http://localhost:5678/api/categories");
     const buttonCategory = await categoriesButtons.json();
-    
+
     buttonCategory.forEach(category => {
-        
+
         let bodyButton = `<input type="submit" value="${category.name}" class="bodyButton">`;
-       let filterButton = document.getElementById("filters");
-       filterButton.innerHTML += bodyButton;
+        let filterButton = document.getElementById("filters");
+        filterButton.innerHTML += bodyButton;
     })
 }
 // =======================================================
@@ -23,7 +23,7 @@ async function getWorksfromAPI(div, modale) {
     const URLAPIwork = await fetch(api_works);
 
     // On extrait les données JSON de la réponse de la requête et les stocke dans la variable AllWorks.
-    const AllWorks   = await URLAPIwork.json();
+    const AllWorks = await URLAPIwork.json();
 
     // On commence une boucle qui parcourt chaque élément (work) dans le tableau AllWorks.
     AllWorks.forEach(work => { // work est le paramètre de la boucle 
@@ -44,14 +44,14 @@ async function getWorksfromAPI(div, modale) {
     const uniqueCategories = new Set();
 
     // On parcoure tous les travaux et ajoute chaque catégorie à l'ensemble uniqueCategories.
-      AllWorks.forEach(work => {
+    AllWorks.forEach(work => {
         uniqueCategories.add(work.category.name);
     });
     // Appel de la fonction pour l'affichage des catégories.
     if (!modale) {
         getCategoriesfromAPI(uniqueCategories)
     }
-    
+
 }
 
 getWorksfromAPI("gallery", false) // Appel de la fonction , sans ça la fonction écrite plus haut ne sera pas executé.
@@ -76,10 +76,10 @@ async function getCategoriesfromAPI(array) {
     // On commence une boucle qui parcourt chaque élément (category) dans le tableau AllCategories.
     array.forEach(category => {
         //On crée des boutons HTML correspondant à chaque catégorie, puis les ajoute à un élément HTML ayant l'ID "filters". 
-       let bodyButton = `<input type="submit" value="${category}" class="bodyButton">`;
-       let filterButton = document.getElementById("filters");
-       filterButton.innerHTML += bodyButton; // le += est important pour ajouter toutes les catégories. 
-       // équivalent à : filterButton.innerHTML = filterButton.innerHTML + bodyButton => à chaque tour rajout d'un bouton
+        let bodyButton = `<input type="submit" value="${category}" class="bodyButton">`;
+        let filterButton = document.getElementById("filters");
+        filterButton.innerHTML += bodyButton; // le += est important pour ajouter toutes les catégories. 
+        // équivalent à : filterButton.innerHTML = filterButton.innerHTML + bodyButton => à chaque tour rajout d'un bouton
     })
 
     // Appel de la fonction pour activer le filtrage par catégorie.
@@ -91,17 +91,17 @@ async function getCategoriesfromAPI(array) {
 // =======================================================
 async function filterByCategory() {
     // On selectionne tous les boutons de catégorie avec la classe "bodyButton".
-    let CategoryButtons = document.querySelectorAll(".bodyButton"); 
+    let CategoryButtons = document.querySelectorAll(".bodyButton");
 
     // Pour chaque bouton de catégorie, on ajoute un écouteur d'événements au clic.
-    CategoryButtons.forEach(buttonCategory =>  {
+    CategoryButtons.forEach(buttonCategory => {
         buttonCategory.addEventListener("click", function () {
             // On obtient la valeur du bouton de catégorie ("objet, appartement ou restaurant")
             const buttonCategoryValue = buttonCategory.getAttribute("value");
 
             // Sélectionnez tous les éléments de la galerie (figures).
-            const galleryItems = document.querySelectorAll(".gallery figure"); 
-            
+            const galleryItems = document.querySelectorAll(".gallery figure");
+
             // Utilisez la méthode filter pour obtenir les éléments de la galerie correspondant à la catégorie sélectionnée.
             const filteredGalleryItems = Array.from(galleryItems).filter(item => {
                 // Assurez-vous de comparer la catégorie de l'élément avec la catégorie sélectionnée.
@@ -140,7 +140,8 @@ spanOut.innerHTML += `<i class="fa-solid fa-pen-to-square"></i> Modifier`;
 if (token == null) {
     spanOut.style.visibility = 'hidden'
 } else {
-    spanOut.style.visibility = 'visible' }
+    spanOut.style.visibility = 'visible'
+}
 
 
 //Récupérer la modal et le bouton
@@ -163,8 +164,8 @@ span.addEventListener("click", fonctionModale => {
 
 
 // si on clique en dehors de la modale, ça la ferme 
-window.onclick = function(event) {
-    if (event.target == modal){
+window.onclick = function (event) {
+    if (event.target == modal) {
         modal.style.display = "none";
     }
 }
@@ -188,42 +189,51 @@ btnRetour.addEventListener("click", retourModale1 => {
 })
 
 
-    
-// Récupérez le fichier d'entrée (input type="file") depuis le formulaire
-const imageInput = document.getElementById('media_image');
-const imageFile = imageInput.files[0];
-
-// Créez un objet FormData pour envoyer le fichier
-const formData = new FormData();
-formData.append('image', imageFile);
 
 
-const titreInput = document.getElementById('media_title');
-const titreFile = titreInput.files;
-formData.append('title', titreFile);
 
-const categoryInput = document.getElementById('media_category');
-const categoryFile = categoryInput.files
-formData.append('category')
+//taille des images
+// <img src="${dataWorks[productWorks].imageUrl}"
+//    alt="${dataWorks[productionWorks].title}" class="galleryModale">
 
 
-// Remplacez l'URL de l'API par l'URL de votre propre API
-//const apiUrl = 'http://votre-api.com/upload-image';
+// Envoie formulaire 
 
-// Envoi de la requête POST vers votre API pour télécharger l'image
-fetch(api_works, {
-  method: 'POST',
-  body: formData,
+const form = document.getElementById('media_form');
+form.addEventListener("submit", function (event) {
+    // Récupérez le fichier d'entrée (input type="file") depuis le formulaire
+    const imageInput = document.getElementById('media_image');
+    const imageFile = imageInput.files[0];
+
+    // Créez un objet FormData pour envoyer le fichier
+    const formData = new FormData();
+    formData.append('image', imageFile);
+
+
+    const titreInput = document.getElementById('media_title');
+    const titreFile = titreInput.files;
+    formData.append('title', titreFile);
+
+    const categoryInput = document.getElementById('media_category');
+    const categoryFile = categoryInput.files
+    formData.append('category', categoryFile)
+
+
+    // Remplacez l'URL de l'API par l'URL de votre propre API
+    //const apiUrl = 'http://votre-api.com/upload-image';
+
+    // Envoi de la requête POST vers votre API pour télécharger l'image
+    fetch(api_works, {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Gérez la réponse de votre API ici
+            console.log('Réponse de l\'API :', data);
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'envoi de la requête :', error);
+        });
+    console.log(event)
 })
-  .then(response => response.json())
-  .then(data => {
-    // Gérez la réponse de votre API ici
-    console.log('Réponse de l\'API :', data);
-  })
-  .catch(error => {
-    console.error('Erreur lors de l\'envoi de la requête :', error);
-  });
-
-  //taille des images
- // <img src="${dataWorks[productWorks].imageUrl}"
-   //    alt="${dataWorks[productionWorks].title}" class="galleryModale">
