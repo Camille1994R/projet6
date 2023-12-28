@@ -203,6 +203,7 @@ footer nav ul {
 .modal {
 	display: none;
 	position: fixed;
+	align-self: center;
 	z-index: 1;
 	left: 0;
 	right: 0;
@@ -227,9 +228,8 @@ footer nav ul {
 	width: 630px;
 	height: 630px;
 	border-radius: 10px;
-	align-content: center;
 	position: relative;
-	flex-wrap: wrap;
+	overflow: scroll;
 }
 
 .close {
@@ -305,6 +305,8 @@ hr {
 	font-style: normal;
 	font-weight: 500;
 	line-height: normal;
+	padding-top: 30px;
+	padding-bottom: 10px;
 }
 
 .boxTitre {
@@ -312,6 +314,7 @@ hr {
 	height: 51px;
 	background-color: #fff;
 	box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.29);
+	border: none;
 }
 
 #media_form {
@@ -321,6 +324,11 @@ hr {
 	flex-wrap: wrap;
 }
 
+#media_category {
+	margin-bottom: 47px;
+	border: none;
+}
+
 .fa-arrow-left {
 	width: 21px;
 	height: 21px;
@@ -328,4 +336,49 @@ hr {
 	top: 30px;
 	position: absolute;
 	cursor: pointer;
+}
+
+.boxPhoto {
+	height: 169px;
+	background-color: #e8f1f6;
+	border-radius: 3px;
+	align-content: center;
+	display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.boxPhoto .fa-regular {
+	height: 76px;
+	width: 76px;
+	padding-top: 13px;
+	padding-bottom: 6px;
+}
+
+.boxAjout {
+	border-radius: 50px;
+	width: 173px;
+	height: 36px;
+	background-color: #cbd6dc;
+}
+
+.boxImage {
+	color: #3b6685;
+	text-align: center;
+	font-family: 'Work Sans' sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: normal;
+}
+
+.boxText {
+	color: #444;
+	text-align: center;
+	font-family: 'Work Sans' sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	padding-top: 7px;
+	padding-bottom: 19px;
 }

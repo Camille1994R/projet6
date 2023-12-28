@@ -76,7 +76,8 @@
 
 	<!-- Modal content -->
 	<div class="modal-content">
-		<span id="close" class="close">&times;</span>
+		<div class="modal2">
+		<span id="close" class="close"><i class="fa-solid fa-xmark"></i></span>
 			
 			
 			<!-- MODALE 2-->
@@ -87,6 +88,17 @@
 
 		<!-- Formulaire d'ajout de média -->
 			<form id="media_form" class="hidden">
+				<div class="boxPhoto">
+						<i class="fa-regular fa-image" style="color: #cbd6dc;"></i>
+
+					<div class="boxAjout">		
+						<label for="media_image" class="boxImage">+ Ajouter photo</label>
+						
+						<input type="file" id="media_image" style="opacity: 0;" accept="image/*" required>
+					</div>
+					<p class="boxText">jpg, pnj : 4mo max</p>
+				</div>
+				
 				<label class="ajoutTitre" for="media_title">Titre :</label>
 				<input class="boxTitre" type="text" id="media_title" required>
 			
@@ -99,18 +111,17 @@
 				</select>
 		
 
-			<label for="media_image">Media pour l'image</label>
-			<input type="file" id="media_image" accept="image/*" required>
+			
 
 			<hr>
 
 			<button class="ajout" id="validate_button" disabled>Valider</button>
 			</form>
 		</div>
-	
+	</div>
 	<!--MODALE 1-->
 
-		<div id="modal1">
+		<div id="modal1" id="modal1">
 			<h3>Galerie photo</h3>
 				<div class="galleryModale" id="galleryModale"></div>
 				<hr>

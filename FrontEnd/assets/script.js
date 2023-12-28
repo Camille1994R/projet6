@@ -197,11 +197,21 @@ const imageFile = imageInput.files[0];
 const formData = new FormData();
 formData.append('image', imageFile);
 
+
+const titreInput = document.getElementById('media_title');
+const titreFile = titreInput.files;
+formData.append('title', titreFile);
+
+const categoryInput = document.getElementById('media_category');
+const categoryFile = categoryInput.files
+formData.append('category')
+
+
 // Remplacez l'URL de l'API par l'URL de votre propre API
-const apiUrl = 'http://votre-api.com/upload-image';
+//const apiUrl = 'http://votre-api.com/upload-image';
 
 // Envoi de la requête POST vers votre API pour télécharger l'image
-fetch(apiUrl, {
+fetch(api_works, {
   method: 'POST',
   body: formData,
 })
