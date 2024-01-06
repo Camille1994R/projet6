@@ -217,11 +217,9 @@ footer nav ul {
 .galleryModale {
 	display: flex;
 	flex-direction: row;
-	justify-content: left;
+	justify-content: center;
 	flex-wrap: wrap;
-	margin: 5px;
-	width: 78px;
-	height: 105px;
+	
 
 }
 
@@ -282,6 +280,7 @@ hr {
 	border: 1px solid #B3B3B3;
 	left: 510px;
 	top: 1229px;
+	margin-top: 45px;
 }
 
 .ajout {
@@ -299,6 +298,15 @@ hr {
 	line-height: normal;
 	cursor: pointer;
 	flex-wrap: wrap;
+}
+
+#galleryModale figure {
+	width: 78px;
+	height: 105px;
+	margin: 0 5px 22px 5px;
+	justify-content: left;
+	margin-bottom: 60px;
+	display: flex;
 }
 
 /* module 2*/

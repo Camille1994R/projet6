@@ -37,6 +37,7 @@ async function getWorksfromAPI(div, modale) {
 				<img src="${image}" alt="${title}" >
 				<figcaption>${title}</figcaption>
 		</figure>
+        <button>Supprimer</button>
         `;
     });
 
@@ -150,7 +151,11 @@ console.log(modal)
 let btn = document.getElementById("modifier");
 btn.addEventListener("click", fonctionModale => {
     modal.style.display = "block";
-    getWorksfromAPI("galleryModale", true)
+    const galleryModale = document.getElementById('galleryModale');
+    if (galleryModale.childNodes.length === 0) {
+        getWorksfromAPI("galleryModale", true)
+    }
+    
     console.log("yo")
 })
 console.log(btn)
@@ -207,26 +212,36 @@ form.addEventListener("submit", function (event) {
 
     // Créez un objet FormData pour envoyer le fichier
     const formData = new FormData();
-    formData.append('image', imageFile);
-
+    formData.append('image', imageFile.name);
+console.log(imageFile.name)
 
     const titreInput = document.getElementById('media_title');
-    const titreFile = titreInput.files;
+    const titreFile = titreInput.value;
     formData.append('title', titreFile);
+    console.log(titreFile)
 
     const categoryInput = document.getElementById('media_category');
-    const categoryFile = categoryInput.files
+    const categoryFile = categoryInput.value;
     formData.append('category', categoryFile)
+    for (var pair of formData.entries()) {
+        console.log(pair[0]+ ' - ' + pair[1]); 
+    }
 
-
-    // Remplacez l'URL de l'API par l'URL de votre propre API
-    //const apiUrl = 'http://votre-api.com/upload-image';
-
+    const formData2 = {
+        "id": 16,
+        "title": "titre",
+        "imageUrl": "http://localhost:5678/images/appartement-paris-v1704534835174.png",
+         "categoryId": "1",
+         "userId": 1
+    }
     // Envoi de la requête POST vers votre API pour télécharger l'image
     fetch(api_works, {
         method: 'POST',
         body: formData,
-    })
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+})
         .then(response => response.json())
         .then(data => {
             // Gérez la réponse de votre API ici
@@ -235,5 +250,7 @@ form.addEventListener("submit", function (event) {
         .catch(error => {
             console.error('Erreur lors de l\'envoi de la requête :', error);
         });
-    console.log(event)
+   event.preventDefault();
 })
+
+
