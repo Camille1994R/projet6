@@ -1,182 +1,191 @@
 const api_works = "http://localhost:5678/api/works";
 const token = localStorage.getItem("jwt");
 
-console.log("teste")
-async function Bcategories() {
-    const categoriesButtons = await fetch("http://localhost:5678/api/categories");
-    const buttonCategory = await categoriesButtons.json();
+//afficher les images
 
-    buttonCategory.forEach(category => {
+async function RecupImages(site, modale) {
+    const apiworks = await fetch(api_works);
+    const worksjson = await apiworks.json();
+    const uniqueCategories = new Set();
 
-        let bodyButton = `<input type="submit" value="${category.name}" class="bodyButton">`;
-        let filterButton = document.getElementById("filters");
-        filterButton.innerHTML += bodyButton;
-    })
-}
-// =======================================================
-// Étape 1.1 : Récupération des travaux depuis le back-end
-// =======================================================
-async function getWorksfromAPI(div, modale) {
-    // div parce qu'on veut le mettre dans deux div
-    // On utilise l'API Fetch pour récupérer les travaux (GET). 
-    // On stocke la réponse de la requête dan une variable URLAPIwork
-    const URLAPIwork = await fetch(api_works);
+    worksjson.forEach(work => {
+        const urlImage = work.imageUrl;
+        const titleImage = work.title;
+        const categoryImage = work.category.name;
+        const imageId = work.id;
 
-    // On extrait les données JSON de la réponse de la requête et les stocke dans la variable AllWorks.
-    const AllWorks = await URLAPIwork.json();
-
-    // On commence une boucle qui parcourt chaque élément (work) dans le tableau AllWorks.
-    AllWorks.forEach(work => { // work est le paramètre de la boucle 
-        const image = work.imageUrl;
-        const title = work.title;
-        const category = work.category.name;
-
-        //On crée le bloc figure HTML correspondant à chaque catégorie, puis on les ajoute à un élément HTML ayant l'ID "gallery". 
-        document.getElementById(div).innerHTML += `
-        <figure name="${category}">
-				<img src="${image}" alt="${title}" >
-				<figcaption>${title}</figcaption>
+        document.getElementById(site).innerHTML += `
+        <figure name="${categoryImage}"id="work_${imageId}">
+				<img src="${urlImage}" alt="${titleImage}" >
+				<figcaption>${titleImage}</figcaption>
+                <a href="#" class="delete" id=${imageId}"><i class="fa-solid fa-trash-can"></i> </a>
 		</figure>
-        <button>Supprimer</button>
         `;
     });
 
-    // On initialise un ensemble (Set) pour stocker les catégories uniques.
-    const uniqueCategories = new Set();
-
-    // On parcoure tous les travaux et ajoute chaque catégorie à l'ensemble uniqueCategories.
-    AllWorks.forEach(work => {
+    worksjson.forEach(work => {
         uniqueCategories.add(work.category.name);
     });
-    // Appel de la fonction pour l'affichage des catégories.
-    if (!modale) {
-        getCategoriesfromAPI(uniqueCategories)
-    }
 
+    const buttonDeleteList = document.querySelectorAll(".delete");
+
+    buttonDeleteList.forEach(buttonDelete => {
+        buttonDelete.addEventListener("click", () => {
+            const workId = buttonDelete.parentElement.id.split('_').pop();
+            suppImage(workId);
+        })
+
+    })
+
+    if (!modale) {
+        recupCategory(uniqueCategories);
+    }
 }
 
-getWorksfromAPI("gallery", false) // Appel de la fonction , sans ça la fonction écrite plus haut ne sera pas executé.
-
-// ===============================================
-// Étape 1.2 : Réalisation du filtre des travaux
-// ==================================================
-
-
-// Étape 1.2 Fonction pour Afficher les catégories
-// ==================================================
-async function getCategoriesfromAPI(array) {
-    // Créez un bouton "Tous" par défaut.
+async function recupCategory(Array) {
     let allButton = document.createElement("input");
     allButton.type = "submit";
     allButton.value = "Tous";
     allButton.classList.add("bodyButton");
-
-    // Ajoutez le bouton "Tous" à l'élément avec l'ID "filters".
     document.getElementById("filters").appendChild(allButton);
 
-    // On commence une boucle qui parcourt chaque élément (category) dans le tableau AllCategories.
-    array.forEach(category => {
-        //On crée des boutons HTML correspondant à chaque catégorie, puis les ajoute à un élément HTML ayant l'ID "filters". 
+    Array.forEach(category => {
         let bodyButton = `<input type="submit" value="${category}" class="bodyButton">`;
         let filterButton = document.getElementById("filters");
-        filterButton.innerHTML += bodyButton; // le += est important pour ajouter toutes les catégories. 
-        // équivalent à : filterButton.innerHTML = filterButton.innerHTML + bodyButton => à chaque tour rajout d'un bouton
+        filterButton.innerHTML += bodyButton; 
     })
-
-    // Appel de la fonction pour activer le filtrage par catégorie.
-    filterByCategory();
+    filterCategory();
 }
 
+async function filterCategory() {
+    let categoryButtons = document.querySelectorAll('.bodyButton');
 
-// Étape 1.2 Fonction pour trier les travaux par catégories 
-// =======================================================
-async function filterByCategory() {
-    // On selectionne tous les boutons de catégorie avec la classe "bodyButton".
-    let CategoryButtons = document.querySelectorAll(".bodyButton");
+    categoryButtons.forEach(buttonCategory => {
+        buttonCategory.addEventListener("click", function() {
+        const buttonCategoryValue = buttonCategory.getAttribute("value");
+        const imageGallery = document.querySelectorAll(".gallery figure");
+        const imagesGalleryFiltre = Array.from(imageGallery).filter(item => {
+            return item.getAttribute("name") === buttonCategoryValue;
+        });
 
-    // Pour chaque bouton de catégorie, on ajoute un écouteur d'événements au clic.
-    CategoryButtons.forEach(buttonCategory => {
-        buttonCategory.addEventListener("click", function () {
-            // On obtient la valeur du bouton de catégorie ("objet, appartement ou restaurant")
-            const buttonCategoryValue = buttonCategory.getAttribute("value");
-
-            // Sélectionnez tous les éléments de la galerie (figures).
-            const galleryItems = document.querySelectorAll(".gallery figure");
-
-            // Utilisez la méthode filter pour obtenir les éléments de la galerie correspondant à la catégorie sélectionnée.
-            const filteredGalleryItems = Array.from(galleryItems).filter(item => {
-                // Assurez-vous de comparer la catégorie de l'élément avec la catégorie sélectionnée.
-                return item.getAttribute("name") === buttonCategoryValue;
-            });
-
-            // Pour chaque élément de la galerie, Afficher ou non en fonction de s'il correspond à la catégorie sélectionnée.
-            galleryItems.forEach(item => {
-                if (filteredGalleryItems.includes(item) || buttonCategoryValue === "Tous") {
-                    item.style.display = "block";
-                } else {
-                    item.style.display = "none";
-                }
-            });
+        imageGallery.forEach(item => {
+            if (imagesGalleryFiltre.includes(item) || buttonCategoryValue === "Tous") {
+                item.computedStyleMap.display = "block";
+            } else {
+                item.computedStyleMap.display = "none";
+            }
         });
     });
+});
 }
 
+async function ajoutImages () {
+    const imageInput = document.getElementById("image");
+    const imageFile = imageInput.files[0];
 
+    const titreInput = document.getElementById("title");
+    const titre = titreInput.value;
 
-console.log(token)
+    const categoryInput = document.getElementById("category");
+    const categoryId = categoryInput.value;
+
+    const formData = new FormData();
+    formData.append("image", imageFile);
+    formData.append("titre", titre);
+    formData.append("category", categoryId);
+
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
+
+    const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formData
+    };
+
+    try {
+        const response = await fetch(api_works, requestOptions);
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log("Travail ajouté avec succès :", responseData)
+        } else {
+            console.error ("Erreur lors de l'ajout du travail. Code de réponse :", response.status);
+        }
+        } catch(error) {
+            console.error("Erreur lors de l'envoi de la requête :", error);
+        }
+
+}
+
+async function suppImage(workId) {
+    const supUrl = `${api_works}/${workId}`;
+
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token );
+
+    const requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+    };
+
+    try {
+        const response = await fetch(supUrl, requestOptions);
+        if (response.ok) {
+            console.log('Travail supprimé avec succès.');
+            const workElement = document.getElementById(`work_${workId}`);
+            if (workElement) {
+                workElement.remove();
+            } else {
+                console.error('Element DOM introuvable pour le travail ID:', workId);
+            }
+        } else {
+            console.error ("Erreur lors de la suppression du travail. Code de réponse:", response.status);
+        }
+    } catch (error) {
+        console.error("Erreur de l'envoi de la requête de suppression :", error);
+    }
+}
+
+RecupImages("gallery", false);
+
 
 let logout = document.getElementById("log");
 if (token == null) {
     logout.innerHTML = "login"
-
 } else {
     logout.innerHTML = "logout"
 }
 
-
-let spanOut = document.getElementById("modifier");
-spanOut.innerHTML += `<i class="fa-solid fa-pen-to-square"></i> Modifier`;
-
+let modifier = document.getElementById("modifier");
+modifier.innerHTML += `<i class="fa-solid fa-pen-to-square"></i> Modifier`;
 
 if (token == null) {
-    spanOut.style.visibility = 'hidden'
+    modifier.style.visibility = "hidden"
 } else {
-    spanOut.style.visibility = 'visible'
+    modifier.style.visibility = "visible"
 }
 
 
-//Récupérer la modal et le bouton
 let modal = document.getElementById("myModal");
-console.log(modal)
-let btn = document.getElementById("modifier");
-btn.addEventListener("click", fonctionModale => {
-    modal.style.display = "block";
-    const galleryModale = document.getElementById('galleryModale');
-    if (galleryModale.childNodes.length === 0) {
-        getWorksfromAPI("galleryModale", true)
-    }
-    
-    console.log("yo")
-})
-console.log(btn)
+let btnModif = document.getElementById("modifier");
+let close = document.getElementById("close");
 
-//Récupération du span qui ferme la modale 
-let span = document.getElementById("close");
-console.log(span)
-span.addEventListener("click", fonctionModale => {
+btnModif.addEventListener("click", fonctionModale => {
+    modal.style.display = "block";
+    const imagesModale = document.getElementById("galleryModale");
+    if (imagesModale.childNodes.length === 0) {
+        console.log("ici")
+        RecupImages("galleryModale", true)
+    }
+})
+close.addEventListener("click", fonctionModale => {
     modal.style.display = "none";
 })
-
-
-// si on clique en dehors de la modale, ça la ferme 
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 }
-
-
-//Si on clique sur "ajouter une photo" Modale 1 hidden et Modale 2 display
 let ajouterPhoto = document.getElementById("ajouterPhoto");
 let addPhoto = document.getElementById("add_photo");
 let modal1 = document.getElementById("modal1")
@@ -193,63 +202,9 @@ btnRetour.addEventListener("click", retourModale1 => {
     modal1.style.display = "block";
 })
 
-
-
-
-
-//taille des images
-// <img src="${dataWorks[productWorks].imageUrl}"
-//    alt="${dataWorks[productionWorks].title}" class="galleryModale">
-
-
-// Envoie formulaire 
-
 const form = document.getElementById('media_form');
 form.addEventListener("submit", function (event) {
-    // Récupérez le fichier d'entrée (input type="file") depuis le formulaire
-    const imageInput = document.getElementById('media_image');
-    const imageFile = imageInput.files[0];
-
-    // Créez un objet FormData pour envoyer le fichier
-    const formData = new FormData();
-    formData.append('image', imageFile.name);
-console.log(imageFile.name)
-
-    const titreInput = document.getElementById('media_title');
-    const titreFile = titreInput.value;
-    formData.append('title', titreFile);
-    console.log(titreFile)
-
-    const categoryInput = document.getElementById('media_category');
-    const categoryFile = categoryInput.value;
-    formData.append('category', categoryFile)
-    for (var pair of formData.entries()) {
-        console.log(pair[0]+ ' - ' + pair[1]); 
-    }
-
-    const formData2 = {
-        "id": 16,
-        "title": "titre",
-        "imageUrl": "http://localhost:5678/images/appartement-paris-v1704534835174.png",
-         "categoryId": "1",
-         "userId": 1
-    }
-    // Envoi de la requête POST vers votre API pour télécharger l'image
-    fetch(api_works, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Authorization': 'Bearer ' + token,
-        }
-})
-        .then(response => response.json())
-        .then(data => {
-            // Gérez la réponse de votre API ici
-            console.log('Réponse de l\'API :', data);
-        })
-        .catch(error => {
-            console.error('Erreur lors de l\'envoi de la requête :', error);
-        });
+    ajoutImages();
    event.preventDefault();
 })
 

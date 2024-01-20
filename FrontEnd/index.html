@@ -13,7 +13,7 @@
 		@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;300;400;500;600;700&display=swap');
 	</style>
 	<script src="https://kit.fontawesome.com/71078efd4b.js" crossorigin="anonymous"></script>
-	
+
 </head>
 <body>		
 <header>
@@ -43,11 +43,9 @@
 	<section id="portfolio">
 		<h2>Mes Projets<span class="myBtn" id="modifier"> </span></h2>
 	
-			<div id="filters"></div>
+		<div id="filters"></div>
 		
-		<div" class="gallery" id="gallery">
-			
-		</div>
+		<div class="gallery" id="gallery"></div>
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>
@@ -92,21 +90,22 @@
 						<i class="fa-regular fa-image" style="color: #cbd6dc;" stroke-width="76"></i>
 
 					<div class="boxAjout">		
-						<label for="media_image" class="boxImage">+ Ajouter photo</label>
+						<label for="image" class="boxImage">+ Ajouter photo</label>
 						
-						<input type="file" id="media_image" style="opacity: 0;" accept="image/*" required>
+						<input type="file" id="image" required>
 					</div>
 					<p class="boxText">jpg, pnj : 4mo max</p>
 				</div>
 				
-				<label class="ajoutTitre" for="media_title">Titre :</label>
-				<input class="boxTitre" type="text" id="media_title" required>
+				<label class="ajoutTitre" for="title">Titre :</label>
+				<input class="boxTitre" type="text" id="title" required>
 			
-				<label class="ajoutTitre" for="media_category">Catégorie :</label>
-				<select class="boxTitre" id="media_category" required>
-				<!-- Options de catégorie peuvent être générées dynamiquement en fonction de votre logique -->
-					<option value="1">Catégorie 1</option>
-					<option value="2">Catégorie 2</option>
+				<label class="ajoutTitre" for="category">Catégorie :</label>
+				<select class="boxTitre" id="category" required>
+				<!-- Ceci doit être géré dynamiquement -->
+					<option value="1">Objets</option>
+					<option value="2">Appartements</option>
+					<option value="3">Hotels & restaurants</option>
 				<!-- ... -->
 				</select>
 		
@@ -130,7 +129,7 @@
 		</div>
 	</div> 
 
-<script src="/FrontEnd/assets/script.js"></script>
+<script src="./assets/script.js"></script>
 
 </body>
 </html>

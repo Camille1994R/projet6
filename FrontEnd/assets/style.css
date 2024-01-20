@@ -149,7 +149,7 @@ margin: auto;
 	margin-bottom: 20px;
 }
 #contact form {
-	text-align: left;
+	text-align: center;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
@@ -169,6 +169,11 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+#filters {
+    margin: 0 auto;
+    text-align: center;
+}
+
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -180,6 +185,11 @@ input[type="submit"]{
 	border-radius: 60px ;
 	-webkit-appearance: none;
 	appearance: none;
+}
+
+.boduButton {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 footer nav ul {
@@ -219,7 +229,7 @@ footer nav ul {
 	flex-direction: row;
 	justify-content: center;
 	flex-wrap: wrap;
-	
+	margin-top: 40px;
 
 }
 
@@ -230,7 +240,7 @@ footer nav ul {
 	height: 630px;
 	border-radius: 10px;
 	position: relative;
-	overflow: scroll;
+	overflow-x: scroll;
 	display: flex;
 	justify-content: center;
 }
@@ -288,8 +298,7 @@ hr {
 	background: #1D6154;
 	width: 237px;
 	height: 36px;
-	margin-bottom: 45px;
-	margin-top: 36px;
+	margin: 36px auto 45px;
 	text-align: center;
 	color: #fff;
 	font-size: 14px;
@@ -297,7 +306,7 @@ hr {
 	font-weight: 700;
 	line-height: normal;
 	cursor: pointer;
-	flex-wrap: wrap;
+	display: block;
 }
 
 #galleryModale figure {
@@ -307,6 +316,7 @@ hr {
 	justify-content: left;
 	margin-bottom: 60px;
 	display: flex;
+	position: relative;
 }
 
 /* module 2*/
@@ -378,7 +388,7 @@ hr {
 .boxImage {
 	color: #3b6685;
 	text-align: center;
-	font-family: 'Work Sans' sans-serif;
+	font-family: 'Work Sans', sans-serif;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: normal;
@@ -387,7 +397,7 @@ hr {
 .boxText {
 	color: #444;
 	text-align: center;
-	font-family: 'Work Sans' sans-serif;
+	font-family: 'Work Sans', sans-serif;
 	font-size: 10px;
 	font-style: normal;
 	font-weight: 400;
@@ -397,3 +407,12 @@ hr {
 }
 
 
+a.delete {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+#gallery a.delete {
+	display: none;
+}
