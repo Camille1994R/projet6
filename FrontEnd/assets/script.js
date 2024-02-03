@@ -199,7 +199,7 @@ addPhoto.addEventListener("click", fonctionModale2 => {
     modal1.style.display = "none";
 })
 
-//Si on clique sur la flèche retour, Modale 1 display et Modale 2 hidden
+
 let btnRetour = document.getElementById("btnRetour");
 btnRetour.addEventListener("click", retourModale1 => {
     ajouterPhoto.style.display = "none";
