@@ -54,6 +54,7 @@ async function recupCategory(Array) {
         let filterButton = document.getElementById("filters");
         filterButton.innerHTML += bodyButton; 
     })
+    
     filterCategory();
 }
 
@@ -62,17 +63,22 @@ async function filterCategory() {
 
     categoryButtons.forEach(buttonCategory => {
         buttonCategory.addEventListener("click", function() {
+        
         const buttonCategoryValue = buttonCategory.getAttribute("value");
+        
         const imageGallery = document.querySelectorAll(".gallery figure");
+        
         const imagesGalleryFiltre = Array.from(imageGallery).filter(item => {
             return item.getAttribute("name") === buttonCategoryValue;
         });
+        
 
         imageGallery.forEach(item => {
             if (imagesGalleryFiltre.includes(item) || buttonCategoryValue === "Tous") {
-                item.computedStyleMap.display = "block";
+                
+                item.style.display = "block";
             } else {
-                item.computedStyleMap.display = "none";
+                item.style.display = "none";
             }
         });
     });
@@ -93,6 +99,7 @@ async function ajoutImages () {
     formData.append("image", imageFile);
     formData.append("titre", titre);
     formData.append("category", categoryId);
+    
 
     let myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + token);
@@ -130,8 +137,7 @@ async function suppImage(workId) {
 
     try {
         const response = await fetch(supUrl, requestOptions);
-        if (response.ok) {
-            console.log('Travail supprimé avec succès.');
+        if (response.ok) {;
             const workElement = document.getElementById(`work_${workId}`);
             if (workElement) {
                 workElement.remove();
@@ -174,7 +180,6 @@ btnModif.addEventListener("click", fonctionModale => {
     modal.style.display = "block";
     const imagesModale = document.getElementById("galleryModale");
     if (imagesModale.childNodes.length === 0) {
-        console.log("ici")
         RecupImages("galleryModale", true)
     }
 })
@@ -192,7 +197,6 @@ let modal1 = document.getElementById("modal1")
 addPhoto.addEventListener("click", fonctionModale2 => {
     ajouterPhoto.style.display = "block";
     modal1.style.display = "none";
-    console.log("ajout")
 })
 
 //Si on clique sur la flèche retour, Modale 1 display et Modale 2 hidden

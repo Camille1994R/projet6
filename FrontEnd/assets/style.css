@@ -279,8 +279,20 @@ h3 {
 	height: 118px;
 }
 
-figcaption {
-	opacity: 0;
+
+.modal figcaption {
+	display: none;
+}
+
+input .boduButton {
+	margin: 0 5px;
+}
+
+.fa-trash-can {
+	color: white;
+	background-color: black;
+	padding: 1px;
+	font-weight: 100;
 }
 
 hr {
