@@ -16,10 +16,14 @@ async function RecupImages(site, modale) {
 
         document.getElementById(site).innerHTML += `
         <figure name="${categoryImage}"id="work_${imageId}">
-				<img src="${urlImage}" alt="${titleImage}" >
-				<figcaption>${titleImage}</figcaption>
-                <a href="#" class="delete" id=${imageId}"><i class="fa-solid fa-trash-can"></i> </a>
-		</figure>
+            <div class="image-container">
+                <img src="${urlImage}" alt="${titleImage}" >
+                <div class="delete-container">
+                    <a href="#" class="delete" id=${imageId}"><i class="fa-solid fa-trash-can"></i></a>
+                </div>
+                <figcaption>${titleImage}</figcaption>
+            </div>
+        </figure>
         `;
     });
 
@@ -52,9 +56,9 @@ async function recupCategory(Array) {
     Array.forEach(category => {
         let bodyButton = `<input type="submit" value="${category}" class="bodyButton">`;
         let filterButton = document.getElementById("filters");
-        filterButton.innerHTML += bodyButton; 
+        filterButton.innerHTML += bodyButton;
     })
-    
+
     filterCategory();
 }
 
@@ -62,30 +66,30 @@ async function filterCategory() {
     let categoryButtons = document.querySelectorAll('.bodyButton');
 
     categoryButtons.forEach(buttonCategory => {
-        buttonCategory.addEventListener("click", function() {
-        
-        const buttonCategoryValue = buttonCategory.getAttribute("value");
-        
-        const imageGallery = document.querySelectorAll(".gallery figure");
-        
-        const imagesGalleryFiltre = Array.from(imageGallery).filter(item => {
-            return item.getAttribute("name") === buttonCategoryValue;
-        });
-        
+        buttonCategory.addEventListener("click", function () {
 
-        imageGallery.forEach(item => {
-            if (imagesGalleryFiltre.includes(item) || buttonCategoryValue === "Tous") {
-                
-                item.style.display = "block";
-            } else {
-                item.style.display = "none";
-            }
+            const buttonCategoryValue = buttonCategory.getAttribute("value");
+
+            const imageGallery = document.querySelectorAll(".gallery figure");
+
+            const imagesGalleryFiltre = Array.from(imageGallery).filter(item => {
+                return item.getAttribute("name") === buttonCategoryValue;
+            });
+
+
+            imageGallery.forEach(item => {
+                if (imagesGalleryFiltre.includes(item) || buttonCategoryValue === "Tous") {
+
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
         });
     });
-});
 }
 
-async function ajoutImages () {
+async function ajoutImages() {
     const imageInput = document.getElementById("image");
     const imageFile = imageInput.files[0];
 
@@ -99,7 +103,7 @@ async function ajoutImages () {
     formData.append("image", imageFile);
     formData.append("titre", titre);
     formData.append("category", categoryId);
-    
+
 
     let myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + token);
@@ -116,11 +120,11 @@ async function ajoutImages () {
             const responseData = await response.json();
             console.log("Travail ajouté avec succès :", responseData)
         } else {
-            console.error ("Erreur lors de l'ajout du travail. Code de réponse :", response.status);
+            console.error("Erreur lors de l'ajout du travail. Code de réponse :", response.status);
         }
-        } catch(error) {
-            console.error("Erreur lors de l'envoi de la requête :", error);
-        }
+    } catch (error) {
+        console.error("Erreur lors de l'envoi de la requête :", error);
+    }
 
 }
 
@@ -128,7 +132,7 @@ async function suppImage(workId) {
     const supUrl = `${api_works}/${workId}`;
 
     let myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + token );
+    myHeaders.append("Authorization", "Bearer " + token);
 
     const requestOptions = {
         method: 'DELETE',
@@ -137,7 +141,8 @@ async function suppImage(workId) {
 
     try {
         const response = await fetch(supUrl, requestOptions);
-        if (response.ok) {;
+        if (response.ok) {
+            ;
             const workElement = document.getElementById(`work_${workId}`);
             if (workElement) {
                 workElement.remove();
@@ -145,7 +150,7 @@ async function suppImage(workId) {
                 console.error('Element DOM introuvable pour le travail ID:', workId);
             }
         } else {
-            console.error ("Erreur lors de la suppression du travail. Code de réponse:", response.status);
+            console.error("Erreur lors de la suppression du travail. Code de réponse:", response.status);
         }
     } catch (error) {
         console.error("Erreur de l'envoi de la requête de suppression :", error);
@@ -186,7 +191,7 @@ btnModif.addEventListener("click", fonctionModale => {
 close.addEventListener("click", fonctionModale => {
     modal.style.display = "none";
 })
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
@@ -209,7 +214,7 @@ btnRetour.addEventListener("click", retourModale1 => {
 const form = document.getElementById('media_form');
 form.addEventListener("submit", function (event) {
     ajoutImages();
-   event.preventDefault();
+    event.preventDefault();
 })
 
 

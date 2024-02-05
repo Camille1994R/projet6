@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,46 +91,68 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
 body {
 	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
+	margin: auto;
+	font-family: 'Work Sans';
 	font-size: 14px;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
 }
+
 section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -71,25 +161,27 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -98,13 +190,16 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -114,6 +209,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -121,10 +217,12 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -137,20 +235,24 @@ li:hover {
 	width: 100%;
 
 }
+
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+
+#contact>* {
 	text-align: center;
 
 }
-#contact h2{
+
+#contact h2 {
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: center;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -161,28 +263,30 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
 #filters {
-    margin: 0 auto;
-    text-align: center;
+	margin: 0 auto;
+	text-align: center;
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 	-webkit-appearance: none;
 	appearance: none;
 }
@@ -221,7 +325,7 @@ footer nav ul {
 	height: 100%;
 	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.4);
-	
+
 }
 
 .galleryModale {
@@ -233,14 +337,16 @@ footer nav ul {
 
 }
 
+
+
 .modal-content {
 	background-color: #fff;
 	margin: 15% auto;
-	width: 630px;
+	width: 80%;
 	height: 630px;
 	border-radius: 10px;
 	position: relative;
-	overflow-x: scroll;
+	overflow-x: hidden;
 	display: flex;
 	justify-content: center;
 }
@@ -271,7 +377,7 @@ h3 {
 	padding-top: 60px;
 	padding-bottom: 20px;
 	text-align: center;
-	
+
 }
 
 .modal-content img {
@@ -292,7 +398,7 @@ input .boduButton {
 	color: white;
 	background-color: black;
 	padding: 1px;
-	font-weight: 100;
+	font-weight: 100 !important;
 }
 
 hr {
@@ -302,7 +408,7 @@ hr {
 	border: 1px solid #B3B3B3;
 	left: 510px;
 	top: 1229px;
-	margin-top: 45px;
+	margin-top: 20px;
 }
 
 .ajout {
@@ -322,13 +428,13 @@ hr {
 }
 
 #galleryModale figure {
-	width: 78px;
+	width: 14%;
 	height: 105px;
 	margin: 0 5px 22px 5px;
 	justify-content: left;
-	margin-bottom: 60px;
 	display: flex;
 	position: relative;
+	text-align: center;
 }
 
 /* module 2*/
@@ -379,8 +485,8 @@ hr {
 	border-radius: 3px;
 	align-content: center;
 	display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+	flex-direction: column;
+	flex-wrap: wrap;
 }
 
 .boxPhoto .fa-regular {
@@ -395,7 +501,18 @@ hr {
 	width: 173px;
 	height: 36px;
 	background-color: #cbd6dc;
+	display: flex;
+	text-align: center;
 }
+
+.fa-regular.fa-image {
+	font-size: 76px;
+	color: #cbd6dc;
+	stroke-width: 76;
+	display: block;
+	margin: auto;
+}
+
 
 .boxImage {
 	color: #3b6685;
@@ -404,6 +521,7 @@ hr {
 	font-size: 14px;
 	font-weight: 500;
 	line-height: normal;
+	margin: auto;
 }
 
 .boxText {
@@ -421,10 +539,16 @@ hr {
 
 a.delete {
 	position: absolute;
-	right: 0;
+	right: 20px;
 	bottom: 0;
+	top: 10px;
+	font-weight: 100;
 }
 
 #gallery a.delete {
+	display: none;
+}
+
+.hidden {
 	display: none;
 }

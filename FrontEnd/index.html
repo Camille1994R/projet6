@@ -87,12 +87,12 @@
 		<!-- Formulaire d'ajout de média -->
 			<form id="media_form" class="hidden">
 				<div class="boxPhoto">
-						<i class="fa-regular fa-image" style="color: #cbd6dc;" stroke-width="76"></i>
+						<i class="fa-regular fa-image"></i>
 
 					<div class="boxAjout">		
 						<label for="image" class="boxImage">+ Ajouter photo</label>
 						
-						<input type="file" id="image" required>
+						<input type="file" id="image" class="hidden" required>
 					</div>
 					<p class="boxText">jpg, pnj : 4mo max</p>
 				</div>
@@ -120,7 +120,7 @@
 	</div>
 	<!--MODALE 1-->
 
-		<div id="modal1" id="modal1">
+		<div id="modal1" class="modal1">
 			<h3>Galerie photo</h3>
 				<div class="galleryModale" id="galleryModale"></div>
 				<hr>
