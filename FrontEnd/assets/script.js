@@ -90,6 +90,7 @@ async function filterCategory() {
 }
 
 async function ajoutImages() {
+    const token = localStorage.getItem("jwt");
     const imageInput = document.getElementById("image");
     const imageFile = imageInput.files[0];
 
@@ -99,31 +100,19 @@ async function ajoutImages() {
     const categoryInput = document.getElementById("category");
     const categoryId = categoryInput.value;
 
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("image", imageFile);
-    formData.append("titre", titre);
+    formData.append("title", titre);
     formData.append("category", categoryId);
 
+    const res = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+       
+    })
 
-    let myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + token);
-
-    const requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: formData
-    };
-
-    try {
-        const response = await fetch(api_works, requestOptions);
-        if (response.ok) {
-            const responseData = await response.json();
-            console.log("Travail ajouté avec succès :", responseData)
-        } else {
-            console.error("Erreur lors de l'ajout du travail. Code de réponse :", response.status);
-        }
-    } catch (error) {
-        console.error("Erreur lors de l'envoi de la requête :", error);
+    if (res.status === 201) {
+        console.log("ca marche")
     }
 
 }
@@ -131,12 +120,13 @@ async function ajoutImages() {
 async function suppImage(workId) {
     const supUrl = `${api_works}/${workId}`;
 
-    let myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + token);
 
     const requestOptions = {
         method: 'DELETE',
-        headers: myHeaders,
+        headers: {
+            accept: "application/json",
+            Authorization: "Bearer " + token,
+        },
     };
 
     try {
@@ -213,8 +203,9 @@ btnRetour.addEventListener("click", retourModale1 => {
 
 const form = document.getElementById('media_form');
 form.addEventListener("submit", function (event) {
-    ajoutImages();
     event.preventDefault();
+    ajoutImages();
+    
 })
 
 
