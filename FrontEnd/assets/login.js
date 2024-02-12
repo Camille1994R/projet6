@@ -1,4 +1,5 @@
 localStorage.removeItem('jwt')
+console.log(document.getElementById("formSubmit"))
 document.getElementById("formSubmit").addEventListener("click", function (e){
 const email = document.getElementById('email').value;
 const password = document.getElementById('password').value;

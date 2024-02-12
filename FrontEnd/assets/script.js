@@ -19,7 +19,7 @@ async function RecupImages(site, modale) {
             <div class="image-container">
                 <img src="${urlImage}" alt="${titleImage}" >
                 <div class="delete-container">
-                    <a href="#" class="delete" id=${imageId}"><i class="fa-solid fa-trash-can"></i></a>
+                    <a href="#" class="delete" id=${imageId}><i class="fa-solid fa-trash-can"></i></a>
                 </div>
                 <figcaption>${titleImage}</figcaption>
             </div>
@@ -34,8 +34,11 @@ async function RecupImages(site, modale) {
     const buttonDeleteList = document.querySelectorAll(".delete");
 
     buttonDeleteList.forEach(buttonDelete => {
+        
         buttonDelete.addEventListener("click", () => {
-            const workId = buttonDelete.parentElement.id.split('_').pop();
+            console.log("buttonDelete",buttonDelete.id)
+            const workId = buttonDelete.id;
+            console.log("workId1",workId)
             suppImage(workId);
         })
 
@@ -108,6 +111,10 @@ async function ajoutImages() {
     const res = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         body: formData,
+        headers: {
+            accept: "application/json",
+            Authorization: "Bearer " + token,
+        }
        
     })
 
@@ -118,8 +125,10 @@ async function ajoutImages() {
 }
 
 async function suppImage(workId) {
-    const supUrl = `${api_works}/${workId}`;
-
+    const token = localStorage.getItem("jwt");
+    const supUrl = `http://localhost:5678/api/works/${workId}`;
+console.log(supUrl)
+console.log("workId", workId)
 
     const requestOptions = {
         method: 'DELETE',
@@ -127,8 +136,9 @@ async function suppImage(workId) {
             accept: "application/json",
             Authorization: "Bearer " + token,
         },
-    };
 
+        
+    };
     try {
         const response = await fetch(supUrl, requestOptions);
         if (response.ok) {
