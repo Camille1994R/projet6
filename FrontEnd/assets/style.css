@@ -312,6 +312,22 @@ footer nav ul {
 	color: black;
 }
 
+#blackBox {
+	background-color: black;
+	height: 59px;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 400;
+	display: flex;
+	text-align: center;
+	justify-content: center;	
+	width: 100%;
+	font-family: 'Work Sans', sans-serif ;
+	align-items: center;
+
+}
+
+
 /* modale */
 
 .modal {
@@ -542,7 +558,7 @@ a.delete {
 	right: 20px;
 	bottom: 0;
 	top: 10px;
-	font-weight: 100;
+	font-weight: 100;	
 }
 
 #gallery a.delete {
@@ -551,4 +567,9 @@ a.delete {
 
 .hidden {
 	display: none;
+}
+
+
+.image-container {
+	position: relative;
 }

@@ -167,6 +167,15 @@ if (token == null) {
     logout.innerHTML = "logout"
 }
 
+let blackBox = document.getElementById("blackBox");
+blackBox.innerHTML += `<i class="fa-solid fa-pen-to-square"></i>  Mode édition`;
+if (token == null){
+    blackBox.style.visibility = "hidden"
+} else {
+    blackBox.style.visibility = "visible"
+}
+
+
 let modifier = document.getElementById("modifier");
 modifier.innerHTML += `<i class="fa-solid fa-pen-to-square"></i> Modifier`;
 
@@ -213,8 +222,9 @@ btnRetour.addEventListener("click", retourModale1 => {
 
 const form = document.getElementById('media_form');
 form.addEventListener("submit", function (event) {
-    event.preventDefault();
     ajoutImages();
+    event.preventDefault();
+    
     
 })
 
