@@ -293,6 +293,7 @@ input.bodyButton {
 	appearance: none;
 }
 
+input.bodyButton.select, 
 input.bodyButton:hover {
 	color: white;
 	background-color: #1D6154;
@@ -576,4 +577,15 @@ a.delete {
 
 .image-container {
 	position: relative;
+}
+
+input#fromSubmit {
+	color: white;
+	background-color: #1D6154;
+	width: 179px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-self: center;
+	border-radius: 60px;
 }

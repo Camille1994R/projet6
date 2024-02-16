@@ -80,15 +80,30 @@ async function filterCategory() {
                 return item.getAttribute("name") === buttonCategoryValue;
             });
 
-
-            imageGallery.forEach(item => {
-                if (imagesGalleryFiltre.includes(item) || buttonCategoryValue === "Tous") {
-
-                    item.style.display = "block";
-                } else {
-                    item.style.display = "none";
+            filters.addEventListener("click", (event) => {
+                if (event.target.matches("input.bodyButton")) {
+                    const buttonCategory = event.target;
+                    const buttonCategoryValue = buttonCategory.value;
+                    
+                    imageGallery.forEach(item => {
+                        if (imagesGalleryFiltre.includes(item) || buttonCategoryValue === "Tous") {
+                            console.log("image filtre", item)
+                            item.style.display = "block";
+                        } else {
+                            item.style.display = "none";
+                        }
+                    });
+            
+                    // Supprimer la classe "select" de tous les boutons
+                    filters.querySelectorAll("input.bodyButton").forEach(button => {
+                        button.classList.remove("select");
+                    });
+            
+                    // Ajouter la classe "select" au bouton actuel
+                    buttonCategory.classList.add("select");
                 }
             });
+
         });
     });
 }
@@ -121,17 +136,7 @@ async function ajoutImages() {
        
     })
 
-
-    /* Mise en place de la preview avant l'upload */
-        function showPreview(event) {
-            if(event.target.files.length> 0) {
-                let src = URL.createObjectURL(event.target.files[0]);
-                let preview = document.getElementById("image");
-                preview.src = src ;
-                preview.style.display="block";
-            }
-        }
-        showPreview()
+        
 
 
     if (res.status === 201) {
@@ -236,6 +241,20 @@ btnRetour.addEventListener("click", retourModale1 => {
     ajouterPhoto.style.display = "none";
     modal1.style.display = "block";
 })
+
+function showPreview(event) {
+            
+    console.log("showpreview")
+    if(event.target.files.length> 0) {
+        let fileReader = new FileReader();
+        fileReader.onload = function (e) {
+            let preview = document.getElementById("image");
+            preview.src = e.target.result;
+            preview.style.display = "block";
+        };
+        fileReader.readAsDataURL(event.target.files[0]);
+    }
+}
 
 const form = document.getElementById('media_form');
 form.addEventListener("submit", function (event) {
