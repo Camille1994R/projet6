@@ -242,19 +242,23 @@ btnRetour.addEventListener("click", retourModale1 => {
     modal1.style.display = "block";
 })
 
-function showPreview(event) {
-            
-    console.log("showpreview")
-    if(event.target.files.length> 0) {
-        let fileReader = new FileReader();
-        fileReader.onload = function (e) {
-            let preview = document.getElementById("image");
+document.getElementById("image").addEventListener("change", function (event) {
+    const input = event.target;
+    const preview = document.getElementById("imagePreview");
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
             preview.src = e.target.result;
             preview.style.display = "block";
         };
-        fileReader.readAsDataURL(event.target.files[0]);
+
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.style.display = "none";
     }
-}
+});
 
 const form = document.getElementById('media_form');
 form.addEventListener("submit", function (event) {
