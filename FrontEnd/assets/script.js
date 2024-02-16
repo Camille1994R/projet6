@@ -31,6 +31,7 @@ async function RecupImages(site, modale) {
         uniqueCategories.add(work.category.name);
     });
 
+    /*Mise en place du bouton supprimé sur les images */
     const buttonDeleteList = document.querySelectorAll(".delete");
 
     buttonDeleteList.forEach(buttonDelete => {
@@ -108,6 +109,8 @@ async function ajoutImages() {
     formData.append("title", titre);
     formData.append("category", categoryId);
 
+  
+
     const res = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         body: formData,
@@ -117,6 +120,19 @@ async function ajoutImages() {
         }
        
     })
+
+
+    /* Mise en place de la preview avant l'upload */
+        function showPreview(event) {
+            if(event.target.files.length> 0) {
+                let src = URL.createObjectURL(event.target.files[0]);
+                let preview = document.getElementById("image");
+                preview.src = src ;
+                preview.style.display="block";
+            }
+        }
+        showPreview()
+
 
     if (res.status === 201) {
         console.log("ca marche")
@@ -159,7 +175,7 @@ console.log("workId", workId)
 
 RecupImages("gallery", false);
 
-
+/*Display ou non en fonction de si on est connecté */
 let logout = document.getElementById("log");
 if (token == null) {
     logout.innerHTML = "login"
@@ -185,6 +201,7 @@ if (token == null) {
     modifier.style.visibility = "visible"
 }
 
+/*Mise en place des boutons pour ouvrir et fermer la modale */
 
 let modal = document.getElementById("myModal");
 let btnModif = document.getElementById("modifier");
@@ -213,7 +230,7 @@ addPhoto.addEventListener("click", fonctionModale2 => {
     modal1.style.display = "none";
 })
 
-
+/*Passer de la modale 2 à la première */
 let btnRetour = document.getElementById("btnRetour");
 btnRetour.addEventListener("click", retourModale1 => {
     ajouterPhoto.style.display = "none";
